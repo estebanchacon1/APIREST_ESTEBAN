@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/Matricula'); // importo el modelo
+const Matricula = require('../models/Matricula'); // importo el modelo
 
 router.get('/', async (req, res) => {
     try {
