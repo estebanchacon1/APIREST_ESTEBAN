@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/Post'); // importo el modelo
+const Post = require('../models/Matricula'); // importo el modelo
 
 router.get('/', async (req, res) => { // llamar toda los pots de la base de datos
     try {
@@ -10,9 +10,9 @@ router.get('/', async (req, res) => { // llamar toda los pots de la base de dato
         res.status(500).json({ message: err.message });
     }
 });
-router.get('/:postId', async (req, res) => {
+router.get('/:matriuclaId', async (req, res) => {
     try {
-        const post = await Post.findById(req.params.postId);
+        const post = await Post.findById(req.params.matriculaId);
                 res.json(post);
     } catch (err) {
         res.json({ message: err.message });
@@ -30,20 +30,20 @@ router.post('/', async (req, res) => { // crear un post
         res.json({ message: err.message });
     }
 });
-router.patch('/:postId', async (req, res) => { // actualizar un post
+router.patch('/:matriuclaId', async (req, res) => { // actualizar un post
     try {
         const updatedPost = await Post.updateOne(
-            { _id: req.params.postId }, { $set: { title: req.body.title, description: req.body.description } });
+            { _id: req.params.matriculaId }, { $set: { title: req.body.title, description: req.body.description } });
         res.json(updatedPost);
     } catch (err) {
         res.json({ message: err.message });
     }
 });
-router.delete('/:postId', async (req, res) => { // eliminar un post
+router.delete('/:matriculaId', async (req, res) => { // eliminar un post
     try {
         const removedPost = await Post.findByIdAndDelete(req.params.postId);
         if(!removedPost){
-            return res.status(404).json({ message: 'Post no encontrado' });
+            return res.status(404).json({ message: 'Matricula no encontrado' });
         }
     } catch (err) {
         res.status(500).json({ message: "Error de conexion" });
