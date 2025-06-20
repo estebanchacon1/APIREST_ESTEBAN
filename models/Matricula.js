@@ -1,18 +1,18 @@
 const mongoose=require('mongoose');
-const PostSchema = mongoose.Schema({
+const MatriculaSchema = mongoose.Schema({
 
-title:{
+estudiante:{
     type:String,
     required:true
 
 },
-description:{
+curso:{
     type:String,
     required:true
 },
-date:{
+fecha:{
     type:Date,
     default:Date.now
 }
 });
-module.exports=mongoose.model('Post',PostSchema); // exporto el modelo
+module.exports=mongoose.model('Matricula',MatriculaSchema); // exporto el modelo

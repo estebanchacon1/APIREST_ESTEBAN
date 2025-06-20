@@ -2,56 +2,65 @@ const express = require('express');
 const router = express.Router();
 const Post = require('../models/Matricula'); // importo el modelo
 
-router.get('/', async (req, res) => { // llamar toda los pots de la base de datos
+router.get('/', async (req, res) => {
     try {
-        const posts = await Post.find();
-        res.json(posts);
+        const matriculas = await Matricula.find();
+        res.json(matriculas);
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 });
-router.get('/:matriuclaId', async (req, res) => {
+
+// Obtener una matrícula por ID
+router.get('/:matriculaId', async (req, res) => {
     try {
-        const post = await Post.findById(req.params.matriculaId);
-                res.json(post);
+        const matricula = await Matricula.findById(req.params.matriculaId);
+        res.json(matricula);
     } catch (err) {
-        res.json({ message: err.message });
-    }
-});
-router.post('/', async (req, res) => { // crear un post
-     const post= new Post({
-        title:req.body.title,
-        description:req.body.description,
-     });
-        try {
-        const savedPost= await post.save();
-        res.json(savedPost);
-    } catch (err) {
-        res.json({ message: err.message });
-    }
-});
-router.patch('/:matriuclaId', async (req, res) => { // actualizar un post
-    try {
-        const updatedPost = await Post.updateOne(
-            { _id: req.params.matriculaId }, { $set: { title: req.body.title, description: req.body.description } });
-        res.json(updatedPost);
-    } catch (err) {
-        res.json({ message: err.message });
-    }
-});
-router.delete('/:matriculaId', async (req, res) => { // eliminar un post
-    try {
-        const removedPost = await Post.findByIdAndDelete(req.params.postId);
-        if(!removedPost){
-            return res.status(404).json({ message: 'Matricula no encontrado' });
-        }
-    } catch (err) {
-        res.status(500).json({ message: "Error de conexion" });
+        res.status(500).json({ message: err.message });
     }
 });
 
+// Crear una matrícula
+router.post('/', async (req, res) => {
+    const matricula = new Matricula({
+        estudiante: req.body.estudiante,
+        curso: req.body.curso
+    });
 
-module.exports=router; // exporto el router
+    try {
+        const savedMatricula = await matricula.save();
+        res.json(savedMatricula);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+// Actualizar una matrícula
+router.patch('/:matriculaId', async (req, res) => {
+    try {
+        const updatedMatricula = await Matricula.updateOne(
+            { _id: req.params.matriculaId },
+            { $set: { estudiante: req.body.estudiante, curso: req.body.curso } }
+        );
+        res.json(updatedMatricula);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+// Eliminar una matrícula
+router.delete('/:matriculaId', async (req, res) => {
+    try {
+        const removedMatricula = await Matricula.findByIdAndDelete(req.params.matriculaId);
+        res.json({ message: 'Matrícula eliminada' });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
+module.exports = router;
+ // exporto el router
 
 
 
