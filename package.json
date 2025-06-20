@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amgarciav/comunicado-nube.git"
+    "url": "git+https://github.com/estebanchacon1/APIREST_ESTEBAN.git"
   },
   "author": "Ana",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/amgarciav/comunicado-nube/issues"
+    "url": "https://github.com/estebanchacon1/APIREST_ESTEBAN/issues"
   },
-  "homepage": "https://github.com/amgarciav/comunicado-nube#readme",
+  "homepage": "https://github.com/estebanchacon1/APIREST_ESTEBAN#README",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",

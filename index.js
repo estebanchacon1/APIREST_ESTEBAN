@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 const postRoute=require('./routes/post');//
 app.use('/servicios', postRoute);
 
-mongoose.connect('mongodb+srv://sena2225:N7OxCaUtjvW7KVH2@formacion.nxr7elr.mongodb.net/post?retryWrites=true&w=majority&appName=formacion', {
+mongoose.connect('', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
